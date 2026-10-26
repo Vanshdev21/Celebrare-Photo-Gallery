@@ -27,7 +27,9 @@ export default function useFetchPhotos() {
         setPhotos(data);
       } catch (err) {
         if (err.name !== "AbortError") {
-          setError("We couldn’t load the photos. Check your connection and try again.");
+          setError(
+            "We couldn't load the photos. Check your connection and try again.",
+          );
         }
       } finally {
         if (!controller.signal.aborted) setLoading(false);

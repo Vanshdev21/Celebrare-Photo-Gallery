@@ -4,7 +4,7 @@ function readStoredFavorites() {
   try {
     const stored = localStorage.getItem(FAVORITES_STORAGE_KEY);
     const parsed = stored ? JSON.parse(stored) : [];
-    return Array.isArray(parsed) ? parsed : [];
+    return parsed;
   } catch {
     return [];
   }
@@ -13,7 +13,9 @@ function readStoredFavorites() {
 export function favoritesReducer(state, action) {
   switch (action.type) {
     case "TOGGLE": {
-      const alreadyFavorite = state.some((photo) => photo.id === action.photo.id);
+      const alreadyFavorite = state.some(
+        (photo) => photo.id === action.photo.id,
+      );
       return alreadyFavorite
         ? state.filter((photo) => photo.id !== action.photo.id)
         : [...state, action.photo];
